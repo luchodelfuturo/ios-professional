@@ -9,7 +9,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     // Elementos de la view aquí: podemos ordenarlos segun el orden de vista
-    
+    let titleLabel = UILabel()
+    let subTitleLabel = UILabel()
     let loginView = LoginView()
     let signInbutton = UIButton(type: .system)
     let errorMessageLabel = UILabel() //Label para mostrar errores de Login
@@ -35,6 +36,22 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController{
     private func style(){
+        //Titulo & SubTitulo
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = .systemBlue
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.text = "Bankey"
+        
+        subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subTitleLabel.textAlignment = .center
+        subTitleLabel.textColor = .systemIndigo
+        subTitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        subTitleLabel.adjustsFontSizeToFitWidth = true
+        subTitleLabel.text = "Please Login and let's play"
+        
+        //Login View
         loginView.translatesAutoresizingMaskIntoConstraints = false
         
         //Estilos del Boton:
@@ -56,10 +73,26 @@ extension LoginViewController{
     }
     
     private func layout(){
+        view.addSubview(titleLabel)
+        view.addSubview(subTitleLabel)
         view.addSubview(loginView)
         view.addSubview(signInbutton)//acá agregamos el botón
         view.addSubview(errorMessageLabel) //agregamos el label
         
+        //titulo y sub titulo
+        NSLayoutConstraint.activate([
+            subTitleLabel.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 3),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 3),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: titleLabel.trailingAnchor, multiplier: 3),
+            //sub title -> le agregamos margen desde el login view que lo separe multiplier 3
+            loginView.topAnchor.constraint(equalToSystemSpacingBelow: subTitleLabel.bottomAnchor, multiplier: 6),
+            subTitleLabel.leadingAnchor.constraint(equalTo: loginView.leadingAnchor),
+            subTitleLabel.trailingAnchor.constraint(equalTo: loginView.trailingAnchor)
+        ])
+        
+        
+        // LoginView
         NSLayoutConstraint.activate([
             loginView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             loginView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
