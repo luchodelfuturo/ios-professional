@@ -7,6 +7,17 @@
 
 import UIKit
 
+
+protocol LogoutDelegate: AnyObject{
+    func didLogout()
+}
+
+protocol LoginViewControllerDelegate : AnyObject{
+    //Aqui vamos a poner cualquier metodo que vamos a ejecutar despues o señal
+    //func didLogin(_ sender: LoginViewController) utilizamos esto si tenemos que pasar info
+    func didLogin()
+}
+
 class LoginViewController: UIViewController {
     // Elementos de la view aquí: podemos ordenarlos segun el orden de vista
     let titleLabel = UILabel()
@@ -14,7 +25,8 @@ class LoginViewController: UIViewController {
     let loginView = LoginView()
     let signInbutton = UIButton(type: .system)
     let errorMessageLabel = UILabel() //Label para mostrar errores de Login
-    
+    //esto es para evitar el Cycle
+    weak var delegate: LoginViewControllerDelegate?
     
     // Definimos variables para guardar data del user y pass
     var username: String?{
@@ -31,6 +43,10 @@ class LoginViewController: UIViewController {
         layout()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        signInbutton.configuration?.showsActivityIndicator = false
+    }
 
 }
 
@@ -135,6 +151,7 @@ extension LoginViewController{
         
         if username == "Lucho" && password == "Aviones"{
             signInbutton.configuration?.showsActivityIndicator = true //Animacion de Loading
+            delegate?.didLogin()
         } else{
             configureView(withMessage: "Incorrect username / password")
         }
