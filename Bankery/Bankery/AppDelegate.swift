@@ -7,6 +7,8 @@
 
 import UIKit
 
+let appColor: UIColor = .systemTeal
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var hasOnboarded = false
@@ -14,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let loginViewController = LoginViewController()
     let onBoardingContainer = OnboardingContainerViewController()
     let dummyViewController = DummyViewController()
+    let mainViewController = MainViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:[
         UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -26,9 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             onBoardingContainer.delegate = self
             dummyViewController.logoutDelegate = self
             
-        window?.rootViewController = loginViewController
+            window?.rootViewController = mainViewController
 //            window?.rootViewController = OnboardingContainerViewController()
 //            window?.rootViewController = OnboardingViewController(heroImageName: "Pixel-Dinosaur", titleText: "Bankey is an app dadada, go to the store and download it")
+            mainViewController.selectedIndex = 1 // Programaticamente seleccion con cual empezar
             
             return true
         }
