@@ -29,8 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             onBoardingContainer.delegate = self
             dummyViewController.logoutDelegate = self
             
-            window?.rootViewController = mainViewController
+//            window?.rootViewController = mainViewController
 //            window?.rootViewController = OnboardingContainerViewController()
+            window?.rootViewController = AccountSummaryViewController()
 //            window?.rootViewController = OnboardingViewController(heroImageName: "Pixel-Dinosaur", titleText: "Bankey is an app dadada, go to the store and download it")
             mainViewController.selectedIndex = 1 // Programaticamente seleccion con cual empezar
             
